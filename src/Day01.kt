@@ -1,17 +1,21 @@
+
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
+    val input = readInput("day1")
+    println(calculateFattestReindeer(input))
+}
+
+fun calculateFattestReindeer(input: List<String>) : Int {
+    // ugly partitioning
+    val partitions = mutableListOf<List<Int>>()
+    var tmpList = mutableListOf<Int>()
+    for (s in input) {
+        if (s.isEmpty()) {
+            partitions.add(tmpList)
+            tmpList = mutableListOf();
+        } else {
+            tmpList.add(s.toInt())
+        }
     }
 
-    fun part2(input: List<String>): Int {
-        return input.size
-    }
-
-    // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
-
-    val input = readInput("Day01")
-    println(part1(input))
-    println(part2(input))
+    return partitions.stream().map(List<Int>::sum).max(naturalOrder()).get();
 }
