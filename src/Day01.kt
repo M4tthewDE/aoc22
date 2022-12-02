@@ -17,5 +17,5 @@ fun calculateFattestReindeer(input: List<String>) : Int {
         }
     }
 
-    return partitions.stream().map(List<Int>::sum).max(naturalOrder()).get();
+    return partitions.maxOfOrNull(List<Int>::sum)!!
 }
